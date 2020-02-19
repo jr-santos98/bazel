@@ -152,6 +152,7 @@ cc_binary(
     srcs = select({
         "//src/conditions:darwin": ["cpu_profiler_posix.cc"],
         "//src/conditions:linux_x86_64": ["cpu_profiler_posix.cc"],
+        "//src/conditions:linux_ppc": ["cpu_profiler_posix.cc"],
         "//conditions:default": ["cpu_profiler_unimpl.cc"],
     }),
     linkshared = 1,
@@ -165,6 +166,7 @@ cc_library(
     hdrs = ["@bazel_tools//tools/jdk:jni_header"] + select({
         "//src/conditions:linux_x86_64": ["@bazel_tools//tools/jdk:jni_md_header-linux"],
         "//src/conditions:linux_aarch64": ["@bazel_tools//tools/jdk:jni_md_header-linux"],
+        "//src/conditions:linux_ppc": ["@bazel_tools//tools/jdk:jni_md_header-linux"],
         "//src/conditions:darwin": ["@bazel_tools//tools/jdk:jni_md_header-darwin"],
         "//src/conditions:freebsd": ["@bazel_tools//tools/jdk:jni_md_header-freebsd"],
         "//src/conditions:openbsd": ["@bazel_tools//tools/jdk:jni_md_header-openbsd"],
@@ -175,6 +177,7 @@ cc_library(
         # Remove these crazy prefixes when we move this rule.
         "//src/conditions:linux_x86_64": ["../../../../../../../../../external/bazel_tools/tools/jdk/include/linux"],
         "//src/conditions:linux_aarch64": ["../../../../../../../../../external/bazel_tools/tools/jdk/include/linux"],
+        "//src/conditions:linux_ppc": ["../../../../../../../../../external/bazel_tools/tools/jdk/include/linux"],
         "//src/conditions:darwin": ["../../../../../../../../../external/bazel_tools/tools/jdk/include/darwin"],
         "//src/conditions:freebsd": ["../../../../../../../../../external/bazel_tools/tools/jdk/include/freebsd"],
         "//src/conditions:openbsd": ["../../../../../../../../../external/bazel_tools/tools/jdk/include/openbsd"],
